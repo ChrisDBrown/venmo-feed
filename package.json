@@ -5,10 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "npm run build; node_modules/push-dir/bin/push-dir.js --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "push-dir": "^0.4.1",
     "vue": "^2.5.16",
     "vue-moment": "^4.0.0"
   },
