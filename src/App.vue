@@ -7,7 +7,7 @@
             Live Venmo Payments
           </h1>
           <h2 class="subtitle">
-            Venmo's public feed gives away a surprising amount of information...
+            Venmo leaks a surprising amount of information...
           </h2>
         </div>
       </div>
