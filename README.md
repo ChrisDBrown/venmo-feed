@@ -1,21 +1,3 @@
-# venmo-feed
+# Venmo Live Payments
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+Quickly thrown together to show what Venmo allows access to if you don't lock down the privacy settings on your account. This isn't everything - photos & comments are available, but this is the most critical info. The only thing really missing is exact payment value.
