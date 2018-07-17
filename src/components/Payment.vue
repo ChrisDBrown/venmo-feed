@@ -2,7 +2,9 @@
   <div class="card list-complete-item">
     <div class="card-content">
       <p class="title is-5">{{info.message}}</p>
-      <span class="is-pulled-right"><a :href="`https://venmo.com/${info.permalink}`">{{info.created_time | moment('HH:mm:ss')}}</a></span>
+      <span class="is-pulled-right">
+        <a :href="`https://venmo.com/${info.permalink}`">{{info.created_time | moment('HH:mm:ss')}}</a>
+        </span>
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">

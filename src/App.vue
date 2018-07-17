@@ -16,7 +16,11 @@
     <div class="columns">
       <div class="column is-two-thirds is-offset-2">
         <transition-group name="list-complete" class="div">
-          <payment v-for="payment in payments" v-bind:key="payment.payment_id" v-bind:info="payment"></payment>
+          <payment
+            v-for="payment in payments"
+            v-bind:key="payment.payment_id"
+            v-bind:info="payment">
+          </payment>
         </transition-group>
       </div>
     </div>
@@ -25,7 +29,7 @@
 
 <script>
 import axios from 'axios';
-import Payment from './components/Payment.vue'
+import Payment from './components/Payment.vue';
 
 function randomish() {
   return Math.ceil(Math.random() * 3);
@@ -34,38 +38,38 @@ function randomish() {
 export default {
   name: 'app',
   components: { Payment },
-  data () {
+  data() {
     return {
       payments: [],
       paymentIds: [],
-    }
+    };
   },
-  mounted () {
+  mounted() {
     this.poll();
     this.loop();
   },
   methods: {
-    poll: function() {
+    poll() {
       axios
         .get(`https://cors.io/?https://venmo.com/api/v5/public?limit=${randomish()}`)
-        .then(response => {
-          response.data.data.forEach(payment => {
+        .then((response) => {
+          response.data.data.forEach((payment) => {
             if (!this.paymentIds.includes(payment.payment_id)) {
               this.payments.unshift(payment);
               this.paymentIds.unshift(payment.payment_id);
             }
-          })
+          });
         });
     },
-    loop: function() {
-      let self = this;
+    loop() {
+      const self = this;
 
-      setTimeout(function(){
+      setTimeout(() => {
         self.poll();
         self.loop();
       }, randomish() * 1000);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import App from './App.vue';
 import VueMoment from 'vue-moment';
+import App from './App.vue';
 
 Vue.config.productionTip = false;
 
