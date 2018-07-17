@@ -1,28 +1,51 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <payment v-for="payment in payments" v-bind:key="payment.payment_id" v-bind:info="payment"></payment>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import axios from 'axios';
+import Payment from './components/Payment.vue'
+
+function randomish() {
+  return Math.ceil(Math.random() * 3);
+}
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld,
+  components: { Payment },
+  data () {
+    return {
+      payments: [],
+      paymentIds: [],
+    }
   },
+  mounted () {
+    this.poll();
+    this.loop();
+  },
+  methods: {
+    poll: function() {
+      axios
+        .get(`https://cors.io/?https://venmo.com/api/v5/public?limit=${randomish()}`)
+        .then(response => {
+          response.data.data.forEach(payment => {
+            if (!this.paymentIds.includes(payment.payment_id)) {
+              this.payments.unshift(payment);
+              this.paymentIds.unshift(payment.payment_id);
+            }
+          })
+        });
+    },
+    loop: function() {
+      let self = this;
+
+      setTimeout(function(){
+        self.poll();
+        self.loop();
+      }, randomish() * 700);
+    }
+  }
 };
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
