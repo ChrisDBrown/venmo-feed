@@ -7,7 +7,7 @@
             Live Venmo Payments
           </h1>
           <h2 class="subtitle">
-            Venmo leaks a surprising amount of information...
+            UPDATE: Venmo have disabled their public API and now return a fake list of responses, likely due to <u><a href="https://www.wired.com/story/i-scraped-millions-of-venmo-payments-your-data-is-at-risk/">this Wired article</a></u>
           </h2>
         </div>
       </div>
@@ -46,12 +46,13 @@ export default {
   },
   mounted() {
     this.poll();
-    this.loop();
+    // No point in looping now that venmo have disabled their API
+    // this.loop();
   },
   methods: {
     poll() {
       axios
-        .get(`https://cors.io/?https://venmo.com/api/v5/public?limit=${randomish()}`)
+        .get(`https://cors-anywhere.herokuapp.com/https://venmo.com/api/v5/public?limit=${randomish()}`)
         .then((response) => {
           response.data.data.forEach((payment) => {
             if (!this.paymentIds.includes(payment.payment_id)) {

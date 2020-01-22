@@ -1,3 +1,3 @@
 module.exports = {
-  baseUrl: '/venmo-feed/',
+  publicPath: '/venmo-feed/',
 };

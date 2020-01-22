@@ -9,15 +9,15 @@
     "deploy": "npm run build; node_modules/push-dir/bin/push-dir.js --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "push-dir": "^0.4.1",
     "vue": "^2.5.16",
-    "vue-moment": "^4.0.0"
+    "vue-moment": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-rc.5",
+    "@vue/cli-plugin-babel": "^4.1.2",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
-    "@vue/cli-service": "^3.0.0-rc.5",
+    "@vue/cli-service": "^4.1.2",
     "@vue/eslint-config-airbnb": "^3.0.0-rc.5",
     "vue-template-compiler": "^2.5.16"
   }
