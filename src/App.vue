@@ -7,7 +7,8 @@
             Live Venmo Payments
           </h1>
           <h2 class="subtitle">
-            UPDATE: Venmo have disabled their public API and now return a fake list of responses, likely due to <u><a href="https://www.wired.com/story/i-scraped-millions-of-venmo-payments-your-data-is-at-risk/">this Wired article</a></u>
+            UPDATE: Venmo no longer allows paged requests to the API, so this will only show a small set of payments.
+            Previously it was possible to load each payment as it occured.
           </h2>
         </div>
       </div>
@@ -31,10 +32,6 @@
 import axios from 'axios';
 import Payment from './components/Payment.vue';
 
-function randomish() {
-  return Math.ceil(Math.random() * 3);
-}
-
 export default {
   name: 'app',
   components: { Payment },
@@ -46,13 +43,11 @@ export default {
   },
   mounted() {
     this.poll();
-    // No point in looping now that venmo have disabled their API
-    // this.loop();
   },
   methods: {
     poll() {
       axios
-        .get(`https://cors-anywhere.herokuapp.com/https://venmo.com/api/v5/public?limit=${randomish()}`)
+        .get('https://cors-anywhere.herokuapp.com/https://venmo.com/api/v5/public')
         .then((response) => {
           response.data.data.forEach((payment) => {
             if (!this.paymentIds.includes(payment.payment_id)) {
@@ -61,14 +56,6 @@ export default {
             }
           });
         });
-    },
-    loop() {
-      const self = this;
-
-      setTimeout(() => {
-        self.poll();
-        self.loop();
-      }, randomish() * 1000);
     },
   },
 };
